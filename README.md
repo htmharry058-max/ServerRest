@@ -38,9 +38,20 @@ El proyecto está organizado siguiendo los estándares de legibilidad y mantenim
 * **`karate-config.js`**: Configuración global del framework, donde se define la `baseUrl` y variables de entorno.
 
 ## 🧠 Estrategia de Automatización e Informe
-Para cumplir con los criterios de evaluación, se aplicaron los siguientes patrones:
+Este informe detalla la estrategia técnica y los patrones de diseño aplicados para dar cumplimiento a los requerimientos del **Reto de Automatización QA-BackEnd**.
 
-* **Patrón Data-Driven**: Uso intensivo de `Scenario Outline` para validar múltiples códigos de estado y rutas con la mínima repetición de código posible.
-* **Desacoplamiento**: Separación clara de los datos (archivos JSON externos) de la lógica del test (Gherkin), lo que facilita enormemente el mantenimiento a largo plazo.
-* **Validación de Contratos**: Cada endpoint cuenta con una validación de esquema rigurosa que asegura que la API devuelva los campos obligatorios y los tipos de datos correctos.
-* **Independencia de Pruebas**: Cada registro de usuario utiliza emails únicos generados dinámicamente mediante el helper de JavaScript, garantizando que los tests sean repetibles y no dependan de un estado previo de la base de datos.
+### 1. Estrategia de Pruebas
+La estrategia se centró en la validación del ciclo de vida completo de la Historia de Usuario: *"Gestionar los usuarios a través de la API"*. Se implementó una suite funcional que cubre el 100% de las operaciones CRUD especificadas:
+
+* **Validación de Contratos:** Se integraron validaciones de esquemas JSON para asegurar que las respuestas de la API cumplan con la estructura y tipos de datos definidos, garantizando la estabilidad del sistema ante cambios en el backend.
+* **Cobertura de Escenarios:** Se aplicó un enfoque de pruebas de borde, incluyendo tanto casos positivos (flujos ideales) como negativos (errores controlados como 400, 404 o 405) para verificar la resiliencia de la API.
+
+### 2. Patrones de Diseño y Buenas Prácticas
+* **Data-Driven Testing (DDT):** Uso del patrón de pruebas guiadas por datos mediante `Scenario Outline`. Esto permite ejecutar múltiples variaciones de una prueba con diferentes entradas y resultados esperados, optimizando la legibilidad y mantenimiento del código.
+* **Desacoplamiento de Datos (External Files):** Se separaron los cuerpos de las peticiones (archivos `.json` en `/requests`) de la lógica de los tests (archivos `.feature`), facilitando la reutilización de componentes.
+* **Generación de Datos Dinámicos (Helper Pattern):** Desarrollo de la utilidad `user-utils.js` para generar datos aleatorios y únicos (como correos con UUID). Esto garantiza que cada ejecución sea independiente y evita fallos por datos duplicados.
+* **Modularización del Proyecto:** El proyecto sigue una estructura clara dividiendo los archivos por función: `features` para la lógica, `requests` para los datos de entrada y `responses` para los esquemas de validación.
+
+### 3. Herramientas y Frameworks
+* **Karate DSL:** Herramienta principal elegida por su capacidad nativa para manejar JSON y realizar aserciones de forma declarativa y sencilla.
+* **Maven:** Utilizado como gestor de dependencias y motor de ejecución para facilitar la ejecución de pruebas y la integración en flujos de CI/CD.
