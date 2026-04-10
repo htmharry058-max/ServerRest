@@ -1,0 +1,6 @@
+{
+  "nome": "#(dynamicName)",
+  "email": "#(dynamicEmail)",
+  "password": "teste",
+  "administrador": "true"
+}
