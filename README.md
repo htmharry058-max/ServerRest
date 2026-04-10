@@ -31,11 +31,14 @@ Tras la ejecución, abre el reporte detallado en tu navegador para analizar los 
 ## 📁 Estructura del Proyecto
 El proyecto está organizado siguiendo los estándares de legibilidad y mantenimiento de Karate DSL:
 
-* **`src/test/java/examples/`**: Contiene los archivos `.feature` con la lógica de las pruebas y los escenarios de aceptación.
-* **`src/test/java/requests/`**: Plantillas JSON que representan el cuerpo (payload) de las peticiones a la API.
-* **`src/test/java/responses/`**: Esquemas JSON utilizados para la validación de contratos y respuestas esperadas.
-* **`user-utils.js`**: Helper desarrollado en JavaScript para la generación de datos aleatorios (nombres, emails únicos).
-* **`karate-config.js`**: Configuración global del framework, donde se define la `baseUrl` y variables de entorno.
+* **`src/test/java/examples/`**: Contiene la lógica de las pruebas dividida por enfoques metodológicos:
+    * **`users`**: Incluye pruebas donde los *requests* y *responses* están definidos dentro del mismo archivo `.feature`. Se mantuvo de esta forma para evidenciar la diferencia entre prácticas básicas y el uso de variables "en duro" frente a métodos más avanzados.
+    * **`usersExternalFile`**: Implementa la lectura de datos desde archivos externos (`.json`). Se utiliza para demostrar buenas prácticas de automatización, evitando el código acoplado y permitiendo una mayor reutilización de componentes.
+    * **`escenariosNegativos`**: Utiliza el patrón `Scenario Outline` para validar múltiples casos de error de manera eficiente. Es la forma óptima de probar diversas condiciones negativas con el mínimo de repetición de código.
+* **`src/test/java/requests/`**: Almacena las plantillas JSON que representan el cuerpo (payload) de las peticiones a la API.
+* **`src/test/java/responses/`**: Contiene los esquemas JSON utilizados para la validación estricta de contratos y respuestas esperadas.
+* **`user-utils.js`**: Helper desarrollado en JavaScript para la generación de datos aleatorios, como nombres y emails únicos con UUID, asegurando la independencia de cada test.
+* **`karate-config.js`**: Archivo de configuración global donde se definen variables de entorno y la `baseUrl` del proyecto.
 
 ## 🧠 Estrategia de Automatización e Informe
 Este informe detalla la estrategia técnica y los patrones de diseño aplicados para dar cumplimiento a los requerimientos del **Reto de Automatización QA-BackEnd**.
